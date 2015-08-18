@@ -3,6 +3,10 @@ set -e
 source /bd_build/buildconfig
 set -x
 
+# Create a data user for common sharring
+groupadd --gid 4488 data
+useradd --uid 4488 --gid 4488 --create-home data
+
 ## Temporarily disable dpkg fsync to make building faster.
 if [[ ! -e /etc/dpkg/dpkg.cfg.d/docker-apt-speedup ]]; then
 	echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/docker-apt-speedup
